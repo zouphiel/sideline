@@ -1,59 +1,61 @@
 # Sideline
 
-A mobile-first, buildless website for an independent freelancer's digital educational products. Plain HTML, CSS, and JavaScript; system fonts; no frameworks, third-party scripts, checkout, or server. GitHub Pages serves the files directly from `main` at the repository root.
+A buildless static landing page for digital educational products, created by **Zouphiel**. The chosen public identity is **Sideline / Zouphiel**. The site deliberately does not publish a country, personal email address, or invented business details.
 
-Live address: https://zouphiel.github.io/sideline/
+Live: https://zouphiel.github.io/sideline/
 
-Local folder: `C:\Users\Helium\Nextcloud\Sideline` (beside `Agency`, never inside it).
+Repository: https://github.com/zouphiel/sideline
 
-## Before business verification
+Local folder: C:\Users\Helium\Nextcloud\Sideline — beside Agency.
 
-The current site is an honest draft with explicitly missing business details. It is **not ready for bank verification** until these are completed. A public nickname may be suitable for the website, but check your bank's identity requirements.
+## What is live
 
-1. The public owner name is **Zouphiel**, matching the GitHub handle and the preference for a nickname. Replace it in all four HTML files if you prefer another public name. Your bank may require a legal name; confirm its requirements before verification.
-2. Replace `OWNER_COUNTRY` with the real country in all four HTML files.
-3. Replace `CONTACT_EMAIL` with a real monitored email in all four HTML files, including the Organization JSON-LD in `index.html`. In the Contact section, replace the placeholder `<span>` with `<a href="mailto:YOUR_REAL_EMAIL">YOUR_REAL_EMAIL</a>` and remove the contact setup note. Do not invent a registered company name or registration number.
-4. Review the policies against the actual way you run the business.
-5. Replace `assets/sideline-starter-guide.pdf` with the finished free guide when ready. The current PDF is a real one-page placeholder edition and is labelled as such on the site. Remove the placeholder wording when the finished guide replaces it.
-6. The course stays **launching soon**. No price, checkout, delivery date, or completed course is claimed.
+- A finished introductory Starter Guide, downloadable as a free three-page PDF without signup or login.
+- A description of the planned 4-in-1 course, clearly labelled launching soon. No checkout, payments, or pre-orders.
+- About information identifying Zouphiel as the independent creator.
+- Public creator and product-question links on GitHub. Questions posted there are public; no private data should be included.
+- Privacy, Terms, and Disclaimer pages describing the current website accurately.
+- Optional Formspree signup code retained in the source, hidden and disabled while unconnected. The website sends no signup data in this state.
 
-## Connect the free email signup
+There is no install or build step to view or publish the site. HTML, CSS, JavaScript, and the PDF are served directly. All internal links and assets are relative to the repository root. External creator links and Formspree actions use their own HTTPS URLs.
 
-1. Open https://formspree.io/ and create a free account, or sign in to your existing account. Verify the recipient email.
-2. Choose **New Form** and create a Sideline signup form. Copy its endpoint, which looks like `https://formspree.io/f/abcdefgh`.
-3. In **index.html**, find the two occurrences of `action="https://formspree.io/f/YOUR_FORM_ID"`: one on `<form id="guide-form">`, one on `<form id="waitlist-form">`. Replace each full action value with your real endpoint. There are clearly marked `FORMSPREE SETUP` comments immediately above them. You may use one endpoint for both, or separate forms. The hidden `signup_type` field identifies which request was made.
-4. Save and commit to `main`. The setup notices hide automatically once the endpoint has a valid Formspree shape. The guide link only appears after Formspree confirms success. A placeholder endpoint never sends or saves an address. Do not add API keys or tokens.
-5. Test each form using an email address you control. Check that the submission arrives in your Formspree dashboard/inbox; check the PDF download and waitlist confirmation. Test failure with your browser offline too. These live provider tests have not been performed with an owner endpoint yet.
-6. **Email delivery is manual on the free plan.** Formspree collects the request and notifies you; this website does not automatically send the PDF to the subscriber. Reply to each guide request with the PDF/link, and email only those who explicitly join the waitlist about the course launch. Never expose your subscriber list. Formspree's free plan currently allows 50 submissions a month; automatic subscriber responses require a paid plan and are not used here. No paid service is required for manual delivery.
-7. If Formspree requires an interactive CAPTCHA, follow its current dashboard guidance for AJAX submissions and test the real configuration. The site will show an error rather than falsely confirm an unaccepted submission. Configure available spam protection and domain restrictions in Formspree. The `_gotcha` field is supplementary, not a guarantee against spam.
+## Optional: activate email delivery and the course waitlist later
 
-PDF files on a static public website are publicly reachable. Hiding the link until signup is a convenience, not access control.
+The public website and free download already work. No form endpoint is needed for them.
 
-## Future paid products
+1. Create a free form at https://formspree.io/ and verify your recipient email with that provider. The recipient address need not appear publicly in the form action.
+2. Before collecting emails, update privacy.html to describe the actual collection, uses, retention, and a working **private** method for deletion/removal requests. Do not direct subscribers to publish their addresses in GitHub issues.
+3. In index.html, find the two FORMSPREE SETUP comments. Replace the full action value https://formspree.io/f/YOUR_FORM_ID on form id="guide-form" and form id="waitlist-form" with your real endpoint. Use one endpoint or separate ones; the hidden signup_type field distinguishes guide requests from waitlist requests. These public endpoint IDs are not secrets. Do not add API keys or credentials.
+4. The JavaScript reveals only configured forms, removes their inactive-state notices, and changes the course button to “Join the course waitlist” when its endpoint is configured. Update the remaining “email updates coming soon” copy in the product card, FAQ, Terms, and Disclaimer at the same time. Keep the direct PDF download available.
+5. Test both forms with an address you control. Confirm the submission reaches your Formspree dashboard/inbox, that the guide confirmation reveals its download link, and that waitlist submission does not imply a purchase. Test an offline/error case. No real submissions have been sent during development.
+6. Email delivery is manual with this free workflow: reply to guide requests with the PDF/link and send course launch emails only to people who explicitly joined the waitlist. This website does not send automatic subscriber emails. Check the provider’s current free limits and spam settings; no paid features are required for manual delivery.
 
-There is a commented-out `FUTURE STORE LINK` in the course card in `index.html`. Only enable it when the course is ready, with your actual Payhip/Gumroad store URL. First replace the clearly marked refund policy placeholder in `terms.html`, and publish the final course contents, price, delivery terms, and relevant consumer information. No payment integration exists now.
+The source keeps both forms hidden and their submit buttons disabled without JavaScript. Placeholder endpoints never receive submissions. A failed or unconfirmed response cannot produce a success message. Public PDF files are not access controlled.
 
-## Edit and deploy
+## Future course sales
 
-No install, build, or Node runtime is needed to view or host the website. Edit the HTML/CSS/JS files directly. All internal links and assets use relative paths so the `/sideline/` project subdirectory works. The Formspree endpoint is intentionally an absolute external HTTPS URL.
+The course card contains a commented-out FUTURE STORE LINK for a real Payhip/Gumroad URL. Only enable it when the course is ready. Before accepting payment, publish the final contents, price, delivery/access details, applicable consumer information, a genuine private support route, and your paid-product refund policy. A FUTURE REFUND POLICY comment marks the position in terms.html. The current policy correctly says that no payments are taken.
 
-GitHub repository: https://github.com/zouphiel/sideline
+## Check and publish edits
 
-GitHub **Settings → Pages → Build and deployment**: select **Deploy from a branch**, **main**, **/(root)**, then **Save**. `.nojekyll` bypasses Jekyll processing. GitHub may still show its own Pages deployment job; there is no application build step.
+From the Sideline folder:
 
-For future edits, from the Sideline folder:
+    npm run ci:code
+    npm run agent:sync -- --message "Describe the change"
 
-```sh
-npm run ci:code
-npm run agent:sync -- --message "Describe the change"
-```
+Node/npm are optional maintenance tools, with zero dependencies to install. The code gate checks the four pages, internal links and anchors, public identity, absence of old identity placeholders, structured data, responsive CSS, JavaScript syntax, the PDF structure, and signup success/failure/inactive behavior. The sync helper stages only the known public site files and pushes this repository’s main branch without force-pushing.
 
-Node/npm are optional development checks only, with zero dependencies to install. The code gate checks page structure, local links/anchors, structured data, JavaScript syntax, responsive CSS, the PDF, and eight signup behavior cases using mocked network responses. The sync helper restricts staging to the known public site files and pushes only this standalone `sideline` repository's `main` branch. It never force-pushes. Windows Git may be used through `wgit` in the managed identity; ordinary local use runs `git`.
+GitHub Settings → Pages must remain “Deploy from a branch”, main, /(root). The .nojekyll file bypasses Jekyll processing. GitHub’s own Pages deployment job does not introduce an application build step.
 
-When the managed identity cannot see the sibling folder, use the documented Windows named-tool bridge for Git operations. Do not expose the Windows home or copy credentials into Linux. The separate Agency/Violead branch and cloud settings are unrelated to this standalone website.
+In the managed identity, use the existing named Windows Git bridge for this sibling folder. Do not expose the Windows home or export credentials. The separate Agency/Violead branch and cloud settings are unrelated to this project.
 
-## References
+## Guide references
 
-- [Formspree HTML form setup](https://formspree.io/html/)
-- [Formspree plan limits and email response features](https://formspree.io/plans)
-- [GitHub Pages documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)
+The introductory guide links to primary sources for the platform and risk basics:
+
+- [Roblox Creator Hub: Monetization](https://create.roblox.com/docs/production/monetization)
+- [Amazon: Fulfillment by Amazon](https://sell.amazon.com/fulfillment-by-amazon)
+- [FTC: Disclosures 101](https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers)
+- [Investor.gov: What is Risk?](https://www.investor.gov/introduction-investing/investing-basics/what-risk)
+
+Signup reference: [Formspree HTML setup](https://formspree.io/html/).

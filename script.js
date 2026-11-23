@@ -9,17 +9,23 @@ document.querySelectorAll('form[data-signup]').forEach((form) => {
   const status = document.getElementById(`${kind}-status`);
   const button = form.querySelector('button[type="submit"]');
   const note = form.parentElement.querySelector('.setup-note');
+  const fallback = form.parentElement.querySelector('[data-signup-fallback]');
   const endpoint = new URL(form.action);
   const configured = endpoint.origin === 'https://formspree.io' && /^\/f\/[a-zA-Z0-9]+$/.test(endpoint.pathname);
 
-  // The HTML keeps submission disabled until this handler can guard the endpoint.
-  button.disabled = false;
-
-  if (configured && note) note.hidden = true;
+  // Unconnected forms never invite visitors to submit an email address.
+  form.hidden = !configured;
+  button.disabled = !configured;
+  if (note) note.hidden = configured;
+  if (fallback) fallback.hidden = configured;
+  if (kind === 'waitlist' && configured) {
+    document.querySelectorAll('[data-waitlist-cta]').forEach((link) => {
+      link.textContent = 'Join the course waitlist';
+    });
+  }
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
-    if (!form.reportValidity() || button.disabled) return;
     status.dataset.state = '';
     status.textContent = '';
 
@@ -28,6 +34,7 @@ document.querySelectorAll('form[data-signup]').forEach((form) => {
       status.textContent = 'Signup is not connected yet. Your email has not been sent or saved. Please check back soon.';
       return;
     }
+    if (!form.reportValidity() || button.disabled) return;
 
     const originalLabel = button.textContent;
     button.disabled = true;
