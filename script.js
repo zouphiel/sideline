@@ -12,6 +12,9 @@ document.querySelectorAll('form[data-signup]').forEach((form) => {
   const endpoint = new URL(form.action);
   const configured = endpoint.origin === 'https://formspree.io' && /^\/f\/[a-zA-Z0-9]+$/.test(endpoint.pathname);
 
+  // The HTML keeps submission disabled until this handler can guard the endpoint.
+  button.disabled = false;
+
   if (configured && note) note.hidden = true;
 
   form.addEventListener('submit', async (event) => {

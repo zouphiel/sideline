@@ -7,7 +7,7 @@ const source = readFileSync(new URL('../script.js', import.meta.url), 'utf8');
 function setup({ kind = 'guide', endpoint = 'https://formspree.io/f/abcdwxyz', valid = true, response = { ok: true, json: async () => ({ ok: true }) }, error } = {}) {
   const status = { dataset: {}, textContent: '' };
   const success = { hidden: true };
-  const button = { disabled: false, textContent: 'Submit' };
+  const button = { disabled: true, textContent: 'Submit' };
   const note = { hidden: false };
   let handler, requests = 0, resets = 0;
   const form = {

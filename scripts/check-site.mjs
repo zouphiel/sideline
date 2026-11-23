@@ -39,6 +39,7 @@ assert.equal(schema.name, 'Sideline');
 assert.ok(schema.email);
 for (const id of ['products', 'course', 'about', 'free-guide', 'waitlist', 'faq', 'contact']) assert.ok(home.includes(`id="${id}"`));
 assert.equal((home.match(/data-signup=/g) || []).length, 2);
+assert.equal((home.match(/<button[^>]*type="submit"[^>]*\bdisabled/g) || []).length, 2, 'HTML submission stays disabled without JavaScript safeguards');
 new vm.Script(readFileSync(resolve(root, 'script.js'), 'utf8'));
 const css = readFileSync(resolve(root, 'styles.css'), 'utf8');
 assert.equal((css.match(/\{/g) || []).length, (css.match(/\}/g) || []).length, 'CSS braces');
