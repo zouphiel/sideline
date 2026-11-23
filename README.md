@@ -10,7 +10,7 @@ Local folder: `C:\Users\Helium\Nextcloud\Sideline` (beside `Agency`, never insid
 
 The current site is an honest draft with explicitly missing business details. It is **not ready for bank verification** until these are completed. A public nickname may be suitable for the website, but check your bank's identity requirements.
 
-1. Replace `OWNER_NAME` with the owner's chosen public name in all four HTML files.
+1. The public owner name is **Zouphiel**, matching the GitHub handle and the preference for a nickname. Replace it in all four HTML files if you prefer another public name. Your bank may require a legal name; confirm its requirements before verification.
 2. Replace `OWNER_COUNTRY` with the real country in all four HTML files.
 3. Replace `CONTACT_EMAIL` with a real monitored email in all four HTML files, including the Organization JSON-LD in `index.html`. In the Contact section, replace the placeholder `<span>` with `<a href="mailto:YOUR_REAL_EMAIL">YOUR_REAL_EMAIL</a>` and remove the contact setup note. Do not invent a registered company name or registration number.
 4. Review the policies against the actual way you run the business.
