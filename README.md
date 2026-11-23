@@ -2,12 +2,6 @@
 
 A buildless static landing page for digital educational products, created by **Zouphiel**. The chosen public identity is **Sideline / Zouphiel**. The site deliberately does not publish a country, personal email address, or invented business details.
 
-Live: https://zouphiel.github.io/sideline/
-
-Repository: https://github.com/zouphiel/sideline
-
-Local folder: C:\Users\Helium\Nextcloud\Sideline — beside Agency.
-
 ## Visual direction and operating preferences
 
 - Plain **Sideline** text for the name; no emblem, lettermark, or pictorial favicon.
