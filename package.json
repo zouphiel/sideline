@@ -1,0 +1,11 @@
+{
+  "name": "sideline-static",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Buildless static Sideline website. Node is needed only for optional maintenance checks.",
+  "scripts": {
+    "ci:code": "node scripts/check-site.mjs",
+    "test": "node scripts/signup.test.mjs",
+    "agent:sync": "node scripts/sync.mjs"
+  }
+}
