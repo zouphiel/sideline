@@ -11,8 +11,9 @@ Local folder: C:\Users\Helium\Nextcloud\Sideline — beside Agency.
 ## Visual direction and operating preferences
 
 - Plain **Sideline** text for the name; no emblem, lettermark, or pictorial favicon.
-- Flat, original 2D cartoon artwork, forest green and warm gold, open spacing, and rounded buttons.
-- Gentle decorative motion with a pause control. Reduced-motion preferences disable animation automatically.
+- Original flat 2D illustration with a Duolingo/Brilliant-inspired learning feel: fresh greens, golden yellow, geometric tiles, and chunky rounded buttons. Keep the artwork and identity original.
+- Static illustrations with no autoplay animation or pause/resume controls. Keep any small hover/press transitions respectful of reduced-motion preferences.
+- Product-led copy: show the business name in the header and footer; avoid repeating it throughout headings and descriptions.
 - No additional service accounts are to be created or connected at this stage.
 - The free guide stays available as a direct download. Email collection and automated email delivery remain deferred.
 - Do not add routine owner alerts for signups or sales. Any future email provider must support automatic customer delivery with owner alerts disabled.

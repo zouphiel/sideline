@@ -70,14 +70,3 @@ document.querySelectorAll('form[data-signup]').forEach((form) => {
     }
   });
 });
-
-// Decorative motion is optional. Reduced-motion preferences are handled in CSS.
-const motionButton = document.querySelector('[data-motion-toggle]');
-if (motionButton) {
-  motionButton.addEventListener('click', () => {
-    const paused = motionButton.getAttribute('aria-pressed') !== 'true';
-    document.body.dataset.motionPaused = String(paused);
-    motionButton.setAttribute('aria-pressed', String(paused));
-    motionButton.textContent = paused ? 'Resume animation' : 'Pause animation';
-  });
-}

@@ -20,8 +20,11 @@ email collection, accounts, downloads, or payments.
 - Preserve the current preference: no new service accounts or activated signup,
   email delivery, checkout, or payments until explicitly requested. Keep routine
   owner signup and sales alerts off when those features are eventually enabled.
-- Keep the plain Sideline wordmark, playful flat 2D green/gold direction, mobile
-  accessibility, reduced-motion behavior, and honest launching-soon course copy.
+- Keep the plain Sideline wordmark in the header/footer and product-led copy
+  elsewhere. Use an original Duolingo/Brilliant-inspired flat 2D green/gold
+  direction with geometric tiles and chunky rounded buttons. No autoplay
+  animation or pause controls. Preserve mobile accessibility, reduced-motion
+  support for hover transitions, and honest launching-soon course copy.
 - Update `public-files.json` only for reviewed public files. Do not weaken a
   guard or bypass a hook just to publish a failed check. A passing scan cannot
   determine whether arbitrary prose or a replacement free PDF contains private
