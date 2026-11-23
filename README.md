@@ -42,12 +42,18 @@ The course card contains a commented-out FUTURE STORE LINK for a real Payhip/Gum
 
 ## Check and publish edits
 
+Read [SECURITY.md](SECURITY.md) and the future-maintenance rules in
+[AGENTS.md](AGENTS.md) before adding integrations. This public repository is the
+storefront. Paid products, customer data, and secret credentials must stay in
+protected provider/server storage outside GitHub Pages. Future sales require
+payment verification and protected delivery; those features are not active now.
+
 From the Sideline folder:
 
     npm run ci:code
     npm run agent:sync -- --message "Describe the change"
 
-Node/npm are optional maintenance tools, with zero dependencies to install. The code gate checks the four pages, internal links and anchors, public identity, absence of old identity placeholders, structured data, responsive CSS, JavaScript syntax, the PDF structure, and signup success/failure/inactive behavior. The sync helper stages only the known public site files and pushes this repository’s main branch without force-pushing.
+Node/npm are optional maintenance tools, with zero dependencies to install. The code gate checks the four pages, internal links and anchors, public identity, absence of old identity placeholders, structured data, responsive CSS, JavaScript syntax, the PDF structure, and signup success/failure/inactive behavior. Publication guards check the reviewed file list, private-file categories, recognizable credential formats, staged blobs, and history. The sync helper stages only reviewed public files and pushes this repository's main branch without force-pushing. See SECURITY.md for the local Git hooks and the checks' limits; a passing scan does not replace reviewing the actual contents.
 
 GitHub Settings → Pages must remain “Deploy from a branch”, main, /(root). The .nojekyll file bypasses Jekyll processing. GitHub’s own Pages deployment job does not introduce an application build step.
 

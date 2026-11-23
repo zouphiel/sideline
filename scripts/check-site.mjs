@@ -4,8 +4,11 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import vm from 'node:vm';
+import { scanPublicFiles } from './public-safety.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
+const safety = scanPublicFiles({ root });
+console.log(`Public safety check passed: ${safety.files} file versions inspected.`);
 const pages = ['index.html', 'privacy.html', 'terms.html', 'disclaimer.html'];
 let links = 0;
 for (const page of pages) {
@@ -59,6 +62,6 @@ assert.match(pdf, /\/Count 3\b/, 'Three-page starter guide');
 assert.match(pdf, /My learning worksheet/);
 assert.doesNotMatch(pdf, /[Pp]laceholder/);
 console.log(`Static checks passed: ${pages.length} pages, ${links} internal links/assets, structured data, JS, responsive CSS, and PDF.`);
-const tests = spawnSync(process.execPath, ['scripts/signup.test.mjs'], { cwd: root, stdio: 'inherit' });
+const tests = spawnSync(process.execPath, ['scripts/run-tests.mjs'], { cwd: root, stdio: 'inherit' });
 if (tests.status !== 0) process.exit(tests.status || 1);
 if (home.includes('YOUR_FORM_ID')) console.log('Email signup is intentionally inactive; the free guide is available as a direct download.');
