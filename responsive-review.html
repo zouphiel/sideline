@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Temporary Sideline responsive review</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#e8edf2;color:#142236;font:14px/1.5 system-ui,sans-serif}header{padding:10px 16px;background:white;border-bottom:1px solid #bac6d0;display:flex;align-items:center;gap:20px;flex-wrap:wrap}label{display:flex;align-items:center;gap:8px}select{font:inherit;padding:5px}main{padding:10px 16px;display:flex;align-items:flex-start;gap:20px}iframe{border:0;display:block;width:390px;height:650px;background:white;box-shadow:0 0 0 1px #8998a8}aside{max-width:330px}output{display:block;white-space:pre-line;padding:12px;background:white;border:1px solid #bac6d0}p{margin-top:0}
+  </style>
+</head>
+<body>
+  <header>
+    <strong>Temporary responsive review</strong>
+    <label>Width <select id="width"><option>320</option><option selected>390</option><option>768</option><option>1024</option></select></label>
+    <label>Page <select id="page"><option value="index.html">Home</option><option value="privacy.html">Privacy</option><option value="terms.html">Terms</option><option value="disclaimer.html">Disclaimer</option></select></label>
+    <label>Section <select id="section"><option value="">Top</option><option value="#products">Products</option><option value="#course">Course</option><option value="#about">About</option><option value="#free-guide">Free guide</option><option value="#waitlist">Course updates</option><option value="#faq">FAQ</option><option value="#contact">Contact/footer</option></select></label>
+  </header>
+  <main>
+    <iframe id="preview" title="Sideline at a phone or tablet viewport" src="index.html"></iframe>
+    <aside><p>This frame loads the actual live site. Its own viewport controls the site's existing responsive CSS.</p><output id="metrics">Loading…</output></aside>
+  </main>
+  <script>
+    'use strict';
+    const frame=document.getElementById('preview');
+    const width=document.getElementById('width');
+    const page=document.getElementById('page');
+    const section=document.getElementById('section');
+    const metrics=document.getElementById('metrics');
+    function measure(){
+      const doc=frame.contentDocument;
+      if(!doc?.body)return;
+      const viewport=doc.documentElement.clientWidth;
+      const content=Math.max(doc.documentElement.scrollWidth,doc.body.scrollWidth);
+      const emails=[...doc.querySelectorAll('input[type="email"]')].filter(node=>node.getClientRects().length).length;
+      metrics.textContent='Loaded: '+page.value+section.value+'\nFrame width: '+width.value+'px\nDocument width: '+viewport+'px\nContent width: '+content+'px\nHorizontal overflow: '+(content>viewport+1?'YES':'NO')+'\nVisible email fields: '+emails;
+    }
+    frame.addEventListener('load',()=>requestAnimationFrame(()=>{
+      if(page.value==='index.html'&&section.value)frame.contentDocument.querySelector(section.value)?.scrollIntoView();
+      measure();
+    }));
+    function navigate(){
+      metrics.textContent='Loading…';
+      section.disabled=page.value!=='index.html';
+      if(section.disabled)section.value='';
+      frame.src=page.value+section.value;
+    }
+    page.addEventListener('change',navigate);
+    section.addEventListener('change',navigate);
+    width.addEventListener('change',()=>{
+      frame.style.width=width.value+'px';
+      requestAnimationFrame(measure);
+    });
+  </script>
+</body>
+</html>
