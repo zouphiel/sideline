@@ -19,7 +19,7 @@ function setup({ kind = 'guide', endpoint = 'https://formspree.io/f/abcdwxyz', v
     reportValidity: () => valid, setAttribute() {}, removeAttribute() {}, reset: () => { resets++; },
   };
   vm.runInNewContext(source, {
-    document: { querySelectorAll: (selector) => selector === '[data-year]' ? [] : selector === '[data-waitlist-cta]' ? [cta] : [form], getElementById: (id) => id === 'guide-success' ? success : status },
+    document: { querySelector: () => null, querySelectorAll: (selector) => selector === '[data-year]' ? [] : selector === '[data-waitlist-cta]' ? [cta] : [form], getElementById: (id) => id === 'guide-success' ? success : status },
     URL, Date, AbortController, setTimeout: () => 1, clearTimeout() {},
     FormData: class { constructor(value) { this.form = value; } },
     fetch: async (_, options) => { requests++; assert.equal(options.method, 'POST'); assert.equal(options.headers.Accept, 'application/json'); if (error) throw error; return response; },

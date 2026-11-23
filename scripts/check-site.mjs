@@ -22,7 +22,8 @@ for (const page of pages) {
   for (const [, value] of activeHTML.matchAll(/(?:href|src)="([^"]+)"/g)) {
     if (/^(https?:|mailto:)/.test(value)) continue;
     assert.ok(!value.startsWith('/'), `${page}: site asset must use a relative path: ${value}`);
-    const [path, hash] = value.split('#');
+    const [relativeURL, hash] = value.split('#');
+    const path = relativeURL.split('?')[0];
     const target = path ? resolve(dirname(resolve(root, page)), path) : resolve(root, page);
     assert.ok(target.startsWith(root), `${page}: path outside site`);
     assert.ok(existsSync(target), `${page}: missing ${value}`);

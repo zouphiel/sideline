@@ -8,6 +8,15 @@ Repository: https://github.com/zouphiel/sideline
 
 Local folder: C:\Users\Helium\Nextcloud\Sideline — beside Agency.
 
+## Visual direction and operating preferences
+
+- Plain **Sideline** text for the name; no emblem, lettermark, or pictorial favicon.
+- Flat, original 2D cartoon artwork, forest green and warm gold, open spacing, and rounded buttons.
+- Gentle decorative motion with a pause control. Reduced-motion preferences disable animation automatically.
+- No additional service accounts are to be created or connected at this stage.
+- The free guide stays available as a direct download. Email collection and automated email delivery remain deferred.
+- Do not add routine owner alerts for signups or sales. Any future email provider must support automatic customer delivery with owner alerts disabled.
+
 ## What is live
 
 - A finished introductory Starter Guide, downloadable as a free three-page PDF without signup or login.
@@ -19,18 +28,13 @@ Local folder: C:\Users\Helium\Nextcloud\Sideline — beside Agency.
 
 There is no install or build step to view or publish the site. HTML, CSS, JavaScript, and the PDF are served directly. All internal links and assets are relative to the repository root. External creator links and Formspree actions use their own HTTPS URLs.
 
-## Optional: activate email delivery and the course waitlist later
+## Email delivery is deferred
 
-The public website and free download already work. No form endpoint is needed for them.
+The current website works without an additional form or email-service account. Its unconnected signup forms are hidden and disabled; no email addresses are collected. Do not activate a provider or request account setup during ordinary design work.
 
-1. Create a free form at https://formspree.io/ and verify your recipient email with that provider. The recipient address need not appear publicly in the form action.
-2. Before collecting emails, update privacy.html to describe the actual collection, uses, retention, and a working **private** method for deletion/removal requests. Do not direct subscribers to publish their addresses in GitHub issues.
-3. In index.html, find the two FORMSPREE SETUP comments. Replace the full action value https://formspree.io/f/YOUR_FORM_ID on form id="guide-form" and form id="waitlist-form" with your real endpoint. Use one endpoint or separate ones; the hidden signup_type field distinguishes guide requests from waitlist requests. These public endpoint IDs are not secrets. Do not add API keys or credentials.
-4. The JavaScript reveals only configured forms, removes their inactive-state notices, and changes the course button to “Join the course waitlist” when its endpoint is configured. Update the remaining “email updates coming soon” copy in the product card, FAQ, Terms, and Disclaimer at the same time. Keep the direct PDF download available.
-5. Test both forms with an address you control. Confirm the submission reaches your Formspree dashboard/inbox, that the guide confirmation reveals its download link, and that waitlist submission does not imply a purchase. Test an offline/error case. No real submissions have been sent during development.
-6. Email delivery is manual with this free workflow: reply to guide requests with the PDF/link and send course launch emails only to people who explicitly joined the waitlist. This website does not send automatic subscriber emails. Check the provider’s current free limits and spam settings; no paid features are required for manual delivery.
+If the owner explicitly asks to activate email delivery later, use a service that automatically sends the free PDF to the visitor and can turn off routine signup and sales alerts to the owner. An account-verification address is distinct from an address for per-signup notifications. Do not publish a private address or credentials in this public repository. Update the privacy policy, provide a working private removal route, and verify delivery before making any signup or delivery claims.
 
-The source keeps both forms hidden and their submit buttons disabled without JavaScript. Placeholder endpoints never receive submissions. A failed or unconfirmed response cannot produce a success message. Public PDF files are not access controlled.
+The existing Formspree placeholders are retained as inactive source scaffolding. Simply filling them in would not by itself meet the requested quiet, automatic delivery flow. No payments or checkout are active.
 
 ## Future course sales
 
