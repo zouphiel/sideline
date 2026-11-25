@@ -15,7 +15,7 @@ const credentialPatterns = [
 ];
 
 function privatePath(path) {
-  return path.split('/').some((part) => /^(?:\.env(?:\..*)?|private|paid|premium|secrets?|credentials?|customer[-_]?data|customers?|subscribers?|orders?|exports?|backups?|cookies?|transcripts?)(?:[._-].*)?$/i.test(part))
+  return /^roblox(?:\/|$)/i.test(path) || path.split('/').some((part) => /^(?:\.env(?:\..*)?|private|paid|premium|secrets?|credentials?|customer[-_]?data|customers?|subscribers?|orders?|exports?|backups?|cookies?|transcripts?)(?:[._-].*)?$/i.test(part))
     || /\.(?:pem|key|p12|pfx|crt|cer|sqlite3?|db|csv|har)$/i.test(path);
 }
 
@@ -89,6 +89,19 @@ export function scanPublicFiles({ root, mode = 'worktree' }) {
         if (!directory && ignoredLocalDirectories.has(name)) continue;
         const path = directory ? `${directory}/${name}` : name;
         const stat = lstatSync(join(root, path));
+        // The owner's standalone local game is never a public file or submodule.
+        // Only this exact ignored root workspace is exempt from disk enumeration;
+        // index and history checks still reject every roblox path unconditionally.
+        if (!directory && name.toLowerCase() === 'roblox') {
+          try {
+            const nestedGit = lstatSync(join(root, path, '.git'));
+            const anchoredIgnore = readFileSync(join(root, '.gitignore'), 'utf8').split(/\r?\n/).includes('/roblox/');
+            if (!stat.isDirectory() || stat.isSymbolicLink() || !nestedGit.isDirectory() || nestedGit.isSymbolicLink() || !anchoredIgnore) throw new Error('Invalid private workspace');
+          } catch {
+            problems.add(path + '/: private workspace must be a real standalone repository protected by /roblox/ in .gitignore');
+          }
+          continue;
+        }
         if (stat.isDirectory() && !stat.isSymbolicLink()) {
           if (directories.has(path)) walk(path);
           else problems.add(`${path}/: directory is not on the reviewed public list`);

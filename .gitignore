@@ -25,3 +25,6 @@ transcripts/
 *.sqlite*
 *.csv
 *.har
+
+# Owner-authorized private workspace; never publish or stage as a submodule.
+/roblox/

@@ -113,3 +113,31 @@ test('a clean reviewed tree passes both staged and history checks', (t) => {
   commit();
   assert.doesNotThrow(() => scanPublicFiles({ root, mode: 'history' }));
 });
+
+test('the private Roblox workspace cannot be approved in the public manifest', () => {
+  for (const path of ['roblox', 'roblox/src/Main.server.luau', 'ROBLOX/assets/icon.png']) {
+    assert.equal(pathProblem(path, new Set([path])), 'private-file category');
+  }
+});
+
+test('the ignored standalone Roblox workspace stays private in worktree, index and history checks', (t) => {
+  const { root, write, git } = fixture(t, true);
+  write('public-files.json', JSON.stringify([...policy, '.gitignore']));
+  write('.gitignore', '/roblox/\n');
+  write('roblox/src/game.luau', '-- Synthetic private game fixture\n');
+  assert.throws(() => scanPublicFiles({ root }), /private workspace must be a real standalone repository/);
+  git('-C', 'roblox', 'init', '--quiet');
+  assert.doesNotThrow(() => scanPublicFiles({ root }));
+  write('.gitignore', '# Missing required private boundary\n');
+  assert.throws(() => scanPublicFiles({ root }), /protected by/);
+  write('.gitignore', '/roblox/\n');
+  git('add', 'public-files.json', '.gitignore', 'script.js');
+  const blob = spawnSync('git', ['hash-object', '-w', 'roblox/src/game.luau'], { cwd: root, encoding: 'utf8' });
+  assert.equal(blob.status, 0);
+  git('update-index', '--add', '--cacheinfo', '100644,' + blob.stdout.trim() + ',roblox/src/game.luau');
+  assert.throws(() => scanPublicFiles({ root, mode: 'staged' }), /roblox.*private-file category/);
+  assert.throws(() => scanPublicFiles({ root }), /roblox.*private-file category/);
+  // This disposable fixture deliberately models an accidental leaked commit.
+  git('commit', '--quiet', '-m', 'Synthetic unsafe history');
+  assert.throws(() => scanPublicFiles({ root, mode: 'history' }), /roblox.*private-file category/);
+});

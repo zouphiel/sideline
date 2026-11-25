@@ -67,7 +67,11 @@ Historical checks require full history; a shallow checkout is rejected. The old
 public `responsive-review.html` QA page is allowed in history only.
 
 Keep `.gitignore` as a second precaution; ignored files can still be force-added
-or remain tracked. Do not keep private materials in this project folder.
+or remain tracked. Do not keep private materials among public storefront files. The owner-authorized
+`roblox/` directory is a separate local-only repository and the sole filesystem
+exception. Its anchored ignore rule and an unconditional private-path prohibition
+protect the parent index and history; it must never become a public file or Git
+submodule. This does not authorize any other private material in the storefront.
 
 If a real secret is exposed, revoke/rotate it immediately and investigate usage.
 Deleting the latest file does not remove past commits or copies. For personal

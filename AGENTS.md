@@ -35,3 +35,14 @@ After changes, run `npm run ci:code`, review the diff, then
 staged blobs, and history before pushing this repo's `main`, without force-push.
 Local Git hooks also check commits/pushes when `core.hooksPath` is `.githooks`.
 Preserve any existing custom hooks when setting up another checkout.
+
+## Owner-authorized private Roblox workspace
+
+The owner keeps a separate local-only game repository in `roblox/` beneath
+this directory. It is an explicit exception to the filesystem-only rule above,
+not part of this public repository. Keep the anchored `/roblox/` ignore rule.
+Never add, force-add, copy, upload, publish, or stage it as a Git submodule.
+Public-file policy rejects its paths even if someone edits the public manifest.
+Worktree checks accept it only as an ignored, real standalone repository.
+Its own AGENTS.md governs work inside it; never run this site's sync there.
+Only deliberately public safeguard changes may enter this site's history.
